@@ -20,7 +20,7 @@ public class InputParameters {
     private int threshold;
     private String accesslog;
 
-    public InputParameters(ApplicationArguments args) {
+    InputParameters(ApplicationArguments args) {
         this.startDate = LocalDateTime.parse(args.getOptionValues("startDate").get(0), DateTimeFormatter.ofPattern("yyyy-MM-dd.HH:mm:ss"));
         this.duration = args.getOptionValues("duration").get(0);
         this.threshold = Integer.parseInt(args.getOptionValues("threshold").get(0));
