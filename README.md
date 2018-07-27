@@ -1,13 +1,15 @@
 Summary
 -------
-This application is built using Maven, Java8, Spring Boot and MySQL.
+- This application is built using Maven, Java8, Spring Boot and MySQL.
 
-This application is basically a log file parser. Additionally it is used for searching IPs which made n requests in the given period.
+- This application is basically a log file parser. Additionally it is used for searching IPs which made n requests in the given period.
 
-If there is a log file in the program arguments, the logs are saved to MySQL.
+- If there is a log file in the program arguments, the logs are saved to MySQL.
 Log file is the optional argument for the application. If it is not given, IPs are searched in existing logs.
 
-To run this application first create a mysql table on your localhost named 'log_parser' and create a user 'log_parser_application'.
+- PreparedStatement is used to be able to save the logs in bulk. It makes bulk insertions much quicker than other methods such as standard Spring Data Jpa save method.
+
+- To run this application first create a mysql table on your localhost named 'log_parser' and create a user 'log_parser_application'.
 Run installDB.sql to create tables and run the following commands:
 
 With accesslog file:
