@@ -28,7 +28,7 @@ public class ParserApplication implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) {
         if (!areInputsValid(args)) {
-            System.out.println("You have to give startDate, duration, threshold and accesslog parameters!");
+            System.out.println("You have to pass startDate, duration, threshold and accesslog parameters in correct format!");
             return;
         }
 
@@ -40,6 +40,9 @@ public class ParserApplication implements ApplicationRunner {
 
         // Find the end time to query for logs
         LocalDateTime endTime = getEndTimeToSearch(inputParameters.getStartDate(), inputParameters.getDuration());
+        if (endTime == null) {
+            return;
+        }
         // Get ip list from the logs
         List<String> ipList = logService.getSearchResultFromLog(inputParameters, endTime);
 
@@ -60,7 +63,8 @@ public class ParserApplication implements ApplicationRunner {
                 return false;
             }
         }
-        return true;
+
+        return Integer.parseInt(args.getOptionValues("threshold").get(0)) > 0;
     }
 
     private LocalDateTime getEndTimeToSearch(LocalDateTime startTime, String duration) {

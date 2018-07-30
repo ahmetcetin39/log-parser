@@ -19,4 +19,7 @@ import java.util.List;
 public interface LogRepository extends JpaRepository<Log, Serializable> {
     @Query("select l.ip from Log l where l.requestTime > ?1 and l.requestTime < ?2 group by l.ip having count(l.ip) > ?3")
     List<String> getIpsWhichPassedThresholdBetweenTimes(LocalDateTime startTime, LocalDateTime endTime, long threshold);
+
+    @Query("select l.agent from Log l where l.ip = ?1")
+    String getAgentByIp(String ip);
 }

@@ -4,6 +4,7 @@ import com.logparser.parser.entity.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * This is the repository interface which is used for DB operations of {@link Comment} entity.
@@ -12,4 +13,5 @@ import java.io.Serializable;
  * @author Ahmet Cetin
  */
 public interface CommentRepository extends JpaRepository<Comment, Serializable> {
+    List<Comment> findAllByIpIn(List<String> ipList);
 }
